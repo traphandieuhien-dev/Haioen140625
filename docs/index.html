@@ -6,6 +6,7 @@
     <title>Love Board ♥</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <header class="topbar">
       <div class="brand">
@@ -20,12 +21,12 @@
         <input
           id="searchInput"
           type="search"
-          placeholder="Tìm kỷ niệm… (vd: Đà Lạt, sinh nhật, 2025)"
+          placeholder="Tìm kỷ niệm… (vd: Quy Nhơn, sinh nhật, 2026)"
         />
         <button id="searchBtn" type="button" aria-label="search">🔎</button>
       </div>
 
-      <!-- CHIP FILTER (đã hoạt động) -->
+      <!-- CHIP FILTER -->
       <nav class="chips" aria-label="filters">
         <button class="chip active" data-filter="all" type="button">
           Tất cả
@@ -45,12 +46,12 @@
 
     <main class="container">
       <section class="masonry" aria-label="photo grid">
-        <!-- PIN 1 -->
+        <!-- ================= PIN 1: QUY NHƠN ================= -->
         <article
           class="pin"
           data-tags="du_lich ky_niem"
-          data-title="Đà Lạt – chiều sương"
-          data-note="Lúc này trời lạnh mà hai đứa cười như điên"
+          data-title="Quy Nhơn – đi biển"
+          data-note="Chuyến đi biển Quy Nhơn. Được anh Hảo đèo đi, vui muốn xỉu."
         >
           <a
             class="pin-media"
@@ -58,27 +59,28 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="images/01.jpg" alt="Kỷ niệm 01" />
+            <img src="images/01.jpg" alt="Quy Nhơn đi biển" />
           </a>
+
           <div class="pin-meta">
-            <div class="pin-title">Đà Lạt – chiều sương</div>
+            <div class="pin-title">Quy Nhơn – đi biển</div>
+
             <div class="pin-sub">
               <span class="tag">#du_lich</span>
               <span class="dot">•</span>
-              <time>2025-12-02</time>
+              <time>2025-06-26</time>
             </div>
-            <p class="pin-note">
-              “Lúc này trời lạnh mà hai đứa cười như điên.”
-            </p>
+
+            <p class="pin-note">Biển xanh – người thương – bình yên.</p>
           </div>
         </article>
 
-        <!-- PIN 2 -->
+        <!-- ================= PIN 2: SINH NHẬT ================= -->
         <article
           class="pin"
           data-tags="sinh_nhat ky_niem"
           data-title="Sinh nhật em"
-          data-note="Bánh hơi xấu nhưng tình thì đẹp"
+          data-note="Sinh nhật 07/01/2026. Bánh hơi xấu nhưng tình thì đẹp :))"
         >
           <a
             class="pin-media"
@@ -86,25 +88,28 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="images/02.jpg" alt="Kỷ niệm 02" />
+            <img src="images/02.jpg" alt="Sinh nhật em" />
           </a>
+
           <div class="pin-meta">
             <div class="pin-title">Sinh nhật em</div>
+
             <div class="pin-sub">
               <span class="tag">#sinh_nhat</span>
               <span class="dot">•</span>
-              <time>2025-10-18</time>
+              <time>2026-01-07</time>
             </div>
-            <p class="pin-note">Bánh hơi xấu nhưng tình thì đẹp :))</p>
+
+            <p class="pin-note">Cảm ơn anh vì ngày hôm đó (và vì anh nữa) ♥</p>
           </div>
         </article>
 
-        <!-- PIN 3 -->
+        <!-- ================= PIN 3: CÀ PHÊ ================= -->
         <article
           class="pin"
           data-tags="hen_ho ky_niem"
-          data-title="Cà phê cuối tuần"
-          data-note="Góc quen, người thương, bình yên"
+          data-title="Cà phê Cam Ranh"
+          data-note="02/07/2025 – Hẹn hò cà phê ở Cam Ranh. Lần đầu đi chơi xa cùng nhau."
         >
           <a
             class="pin-media"
@@ -112,24 +117,23 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="images/03.jpg" alt="Kỷ niệm 03" />
+            <img src="images/03.jpg" alt="Cà phê Cam Ranh" />
           </a>
+
           <div class="pin-meta">
-            <div class="pin-title">Cà phê cuối tuần</div>
+            <div class="pin-title">Cà phê Cam Ranh</div>
+
             <div class="pin-sub">
               <span class="tag">#hen_ho</span>
               <span class="dot">•</span>
-              <time>2026-01-05</time>
+              <time>2025-07-02</time>
             </div>
-            <p class="pin-note">Góc quen, người thương, bình yên.</p>
+
+            <p class="pin-note">Một buổi bình yên, chỉ cần có nhau.</p>
           </div>
         </article>
-
-        <!-- Bạn thêm ảnh mới: copy 1 block PIN và đổi:
-           - images/04.jpg
-           - data-tags="..."
-           - tiêu đề + note + ngày
-      --></section>
+        <!-- =================================================== -->
+      </section>
 
       <footer class="footer">
         <span>Made with ♥</span>
