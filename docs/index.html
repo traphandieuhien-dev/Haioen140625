@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Love Board ♥</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">♥</span>
+        <div class="brand-text">
+          <strong>Love Board</strong>
+          <small>Những khoảnh khắc của tụi mình</small>
+        </div>
+      </div>
+
+      <div class="search">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Tìm kỷ niệm… (vd: Đà Lạt, sinh nhật, 2025)"
+        />
+        <button id="searchBtn" type="button" aria-label="search">🔎</button>
+      </div>
+
+      <!-- CHIP FILTER (đã hoạt động) -->
+      <nav class="chips" aria-label="filters">
+        <button class="chip active" data-filter="all" type="button">
+          Tất cả
+        </button>
+        <button class="chip" data-filter="du_lich" type="button">
+          Du lịch
+        </button>
+        <button class="chip" data-filter="sinh_nhat" type="button">
+          Sinh nhật
+        </button>
+        <button class="chip" data-filter="hen_ho" type="button">Hẹn hò</button>
+        <button class="chip" data-filter="ky_niem" type="button">
+          Kỷ niệm
+        </button>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="masonry" aria-label="photo grid">
+        <!-- PIN 1 -->
+        <article
+          class="pin"
+          data-tags="du_lich ky_niem"
+          data-title="Đà Lạt – chiều sương"
+          data-note="Lúc này trời lạnh mà hai đứa cười như điên"
+        >
+          <a
+            class="pin-media"
+            href="images/01.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="images/01.jpg" alt="Kỷ niệm 01" />
+          </a>
+          <div class="pin-meta">
+            <div class="pin-title">Đà Lạt – chiều sương</div>
+            <div class="pin-sub">
+              <span class="tag">#du_lich</span>
+              <span class="dot">•</span>
+              <time>2025-12-02</time>
+            </div>
+            <p class="pin-note">
+              “Lúc này trời lạnh mà hai đứa cười như điên.”
+            </p>
+          </div>
+        </article>
+
+        <!-- PIN 2 -->
+        <article
+          class="pin"
+          data-tags="sinh_nhat ky_niem"
+          data-title="Sinh nhật em"
+          data-note="Bánh hơi xấu nhưng tình thì đẹp"
+        >
+          <a
+            class="pin-media"
+            href="images/02.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="images/02.jpg" alt="Kỷ niệm 02" />
+          </a>
+          <div class="pin-meta">
+            <div class="pin-title">Sinh nhật em</div>
+            <div class="pin-sub">
+              <span class="tag">#sinh_nhat</span>
+              <span class="dot">•</span>
+              <time>2025-10-18</time>
+            </div>
+            <p class="pin-note">Bánh hơi xấu nhưng tình thì đẹp :))</p>
+          </div>
+        </article>
+
+        <!-- PIN 3 -->
+        <article
+          class="pin"
+          data-tags="hen_ho ky_niem"
+          data-title="Cà phê cuối tuần"
+          data-note="Góc quen, người thương, bình yên"
+        >
+          <a
+            class="pin-media"
+            href="images/03.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="images/03.jpg" alt="Kỷ niệm 03" />
+          </a>
+          <div class="pin-meta">
+            <div class="pin-title">Cà phê cuối tuần</div>
+            <div class="pin-sub">
+              <span class="tag">#hen_ho</span>
+              <span class="dot">•</span>
+              <time>2026-01-05</time>
+            </div>
+            <p class="pin-note">Góc quen, người thương, bình yên.</p>
+          </div>
+        </article>
+
+        <!-- Bạn thêm ảnh mới: copy 1 block PIN và đổi:
+           - images/04.jpg
+           - data-tags="..."
+           - tiêu đề + note + ngày
+      --></section>
+
+      <footer class="footer">
+        <span>Made with ♥</span>
+        <span class="sep">•</span>
+        <span>Tip: bấm vào ảnh để mở full</span>
+      </footer>
+    </main>
+
+    <script>
+      const chips = document.querySelectorAll(".chip[data-filter]");
+      const pins = document.querySelectorAll(".pin");
+      const searchInput = document.getElementById("searchInput");
+      const searchBtn = document.getElementById("searchBtn");
+
+      let currentFilter = "all";
+      let currentQuery = "";
+
+      function normalizeText(s) {
+        return (s || "")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "") // bỏ dấu tiếng Việt
+          .trim();
+      }
+
+      function pinMatchesFilter(pin, filter) {
+        const tags = (pin.getAttribute("data-tags") || "")
+          .split(/\s+/)
+          .filter(Boolean);
+        return filter === "all" || tags.includes(filter);
+      }
+
+      function pinMatchesSearch(pin, query) {
+        if (!query) return true;
+
+        const title = normalizeText(pin.getAttribute("data-title"));
+        const note = normalizeText(pin.getAttribute("data-note"));
+        const tags = normalizeText(pin.getAttribute("data-tags"));
+        const date = normalizeText(pin.querySelector("time")?.textContent);
+
+        const haystack = `${title} ${note} ${tags} ${date}`;
+        return haystack.includes(query);
+      }
+
+      function applyAll() {
+        const q = normalizeText(currentQuery);
+
+        pins.forEach((pin) => {
+          const show =
+            pinMatchesFilter(pin, currentFilter) && pinMatchesSearch(pin, q);
+          pin.style.display = show ? "" : "none";
+        });
+      }
+
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          chips.forEach((c) => c.classList.remove("active"));
+          chip.classList.add("active");
+
+          currentFilter = chip.dataset.filter;
+          applyAll();
+
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      function doSearch() {
+        currentQuery = searchInput.value;
+        applyAll();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      searchBtn.addEventListener("click", doSearch);
+      searchInput.addEventListener("input", doSearch);
+
+      // mặc định
+      applyAll();
+    </script>
+  </body>
+</html>
